@@ -41,11 +41,14 @@ jobs:
       # 4️⃣ Build & Push Image using Kaniko
       - name: Build and Push Image
         uses: docker://gcr.io/kaniko-project/executor:debug
+        env:
+          DOCKER_CONFIG: /github/workspace/.docker
         with:
           args: >
             --context=${{ github.workspace }}
             --destination=${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
             --force
+
 
       # 5️⃣ Checkout GitOps repo
       - name: Checkout GitOps Repo
